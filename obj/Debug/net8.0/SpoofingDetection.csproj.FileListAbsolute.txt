@@ -1,0 +1,17 @@
+D:\DoAn\WorkSpace\SpoofingDetection\bin\Debug\net8.0\SpoofingDetection.exe
+D:\DoAn\WorkSpace\SpoofingDetection\bin\Debug\net8.0\SpoofingDetection.deps.json
+D:\DoAn\WorkSpace\SpoofingDetection\bin\Debug\net8.0\SpoofingDetection.runtimeconfig.json
+D:\DoAn\WorkSpace\SpoofingDetection\bin\Debug\net8.0\SpoofingDetection.dll
+D:\DoAn\WorkSpace\SpoofingDetection\bin\Debug\net8.0\SpoofingDetection.pdb
+D:\DoAn\WorkSpace\SpoofingDetection\obj\Debug\net8.0\SpoofingDetection.GeneratedMSBuildEditorConfig.editorconfig
+D:\DoAn\WorkSpace\SpoofingDetection\obj\Debug\net8.0\SpoofingDetection.AssemblyInfoInputs.cache
+D:\DoAn\WorkSpace\SpoofingDetection\obj\Debug\net8.0\SpoofingDetection.AssemblyInfo.cs
+D:\DoAn\WorkSpace\SpoofingDetection\obj\Debug\net8.0\SpoofingDetection.csproj.CoreCompileInputs.cache
+D:\DoAn\WorkSpace\SpoofingDetection\obj\Debug\net8.0\SpoofingDetection.dll
+D:\DoAn\WorkSpace\SpoofingDetection\obj\Debug\net8.0\refint\SpoofingDetection.dll
+D:\DoAn\WorkSpace\SpoofingDetection\obj\Debug\net8.0\SpoofingDetection.pdb
+D:\DoAn\WorkSpace\SpoofingDetection\obj\Debug\net8.0\SpoofingDetection.genruntimeconfig.cache
+D:\DoAn\WorkSpace\SpoofingDetection\obj\Debug\net8.0\ref\SpoofingDetection.dll
+D:\DoAn\WorkSpace\SpoofingDetection\bin\Debug\net8.0\OpenCvSharp.dll
+D:\DoAn\WorkSpace\SpoofingDetection\obj\Debug\net8.0\SpoofingDetection.csproj.AssemblyReference.cache
+D:\DoAn\WorkSpace\SpoofingDetection\obj\Debug\net8.0\SpoofingDetection.csproj.CopyComplete
