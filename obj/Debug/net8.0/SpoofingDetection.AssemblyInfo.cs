@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SpoofingDetection")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6913cd18634f7830097a2f0fee85754e046fde9f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("SpoofingDetection")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SpoofingDetection")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
