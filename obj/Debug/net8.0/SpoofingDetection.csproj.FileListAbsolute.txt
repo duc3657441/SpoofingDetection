@@ -15,3 +15,8 @@ D:\DoAn\WorkSpace\SpoofingDetection\obj\Debug\net8.0\ref\SpoofingDetection.dll
 D:\DoAn\WorkSpace\SpoofingDetection\bin\Debug\net8.0\OpenCvSharp.dll
 D:\DoAn\WorkSpace\SpoofingDetection\obj\Debug\net8.0\SpoofingDetection.csproj.AssemblyReference.cache
 D:\DoAn\WorkSpace\SpoofingDetection\obj\Debug\net8.0\SpoofingDetection.csproj.CopyComplete
+D:\DoAn\WorkSpace\SpoofingDetection\obj\Debug\net8.0\SpoofingDetection.sourcelink.json
+D:\DoAn\WorkSpace\SpoofingDetection\bin\Debug\net8.0\runtimes\win-x64\native\OpenCvSharpExtern.dll
+D:\DoAn\WorkSpace\SpoofingDetection\bin\Debug\net8.0\runtimes\win-x64\native\opencv_videoio_ffmpeg490_64.dll
+D:\DoAn\WorkSpace\SpoofingDetection\bin\Debug\net8.0\runtimes\win-x86\native\OpenCvSharpExtern.dll
+D:\DoAn\WorkSpace\SpoofingDetection\bin\Debug\net8.0\runtimes\win-x86\native\opencv_videoio_ffmpeg490.dll

@@ -9,5 +9,6 @@ namespace SpoofingDetection.Classes
 {
     internal class face_splitting
     {
+
     }
 }

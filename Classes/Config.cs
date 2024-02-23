@@ -15,8 +15,8 @@ namespace SpoofingDetection.Classes
         public string TRAINING_DATA_DIR = Path.Combine(DATA_SET_DIR, "Train");
         public string TESTING_DATA_DIR = Path.Combine(DATA_SET_DIR, "Test");
 
-        public static string OPENCV_FACE_CAFFE_MODEL = "OpenCV_Face_Caffe_Model/res10_300x300_ssd_iter_140000.caffemodel";
-        public static string OPENCV_FACE_CAFFE_PROTOTXT = "OpenCV_Face_Caffe_Model/deploy.prototxt";
+        public static string OPENCV_FACE_CAFFE_MODEL = "res10_300x300_ssd_iter_140000.caffemodel";
+        public static string OPENCV_FACE_CAFFE_PROTOTXT = "deploy.prototxt";
 
         public string SPOOFNING_NET = "spoofingnet";
         public string SPOOFNING_MOBILE_NET = "mobilenet";

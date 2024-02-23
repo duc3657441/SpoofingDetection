@@ -7,9 +7,11 @@ namespace SpoofingDetection
     {
         static void Main(string[] args)
         {
-          Face_detector face_Detector = new Face_detector();
+            var image = Cv2.ImRead("D:\\DoAn\\WorkSpace\\face-detection-using-opencvsharp\\Images\\duc.jpg");
+            FacePrediction p = new FacePrediction();
+            Face_detector face_detector = new Face_detector();
+            p = face_detector.Predict_one(image);        
 
-            
         }
     }
 
