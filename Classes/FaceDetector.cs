@@ -88,7 +88,6 @@ namespace SpoofingDetectionWinformApp.Classes
                         continue;
                     }
                     Cv2.Rectangle(frame, new OpenCvSharp.Point(start_x, start_y), new OpenCvSharp.Point(end_x, end_y), Scalar.Black);
-
                     var face = frame.SubMat(start_y, end_y, start_x, end_x);
                     List<int> roi = new List<int>();
                     roi.Add(start_x);
@@ -133,14 +132,14 @@ namespace SpoofingDetectionWinformApp.Classes
                 int end_x = (int)(detectionmat.At<float>(i, 5) * size.Width);
                 int end_y = (int)(detectionmat.At<float>(i, 6) * size.Height);
                 Cv2.Rectangle(frame, new OpenCvSharp.Point(start_x, start_y), new OpenCvSharp.Point(end_x, end_y), Scalar.Black);
-
+                
                 var face = frame.SubMat(start_y, end_y, start_x, end_x);
                 List<int> roi = new List<int>();
                 roi.Add(start_x);
                 roi.Add(start_y);
                 roi.Add(end_x);
                 roi.Add(end_y);
-
+                
                 facePredictions.Face = face;
                 facePredictions.ROI = roi;
                 facePredictions.Confidence = confidence;

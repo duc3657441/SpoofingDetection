@@ -1,6 +1,7 @@
 ﻿using OpenCvSharp;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace SpoofingDetectionWinformApp.Classes
         public string __WINDOW_CAPTION = "Face Splitter - (press q to exit or esc to toggle predict one/multi)";
 
         private string __outputDir;
-        private string? __srcInput = null;
+        private string __srcInput;
         private OpenCvSharp.Size __resolution = default;
         private string __proto_text_path = Config.OPENCV_FACE_CAFFE_PROTOTXT;
         private string __caffe_model_path = Config.OPENCV_FACE_CAFFE_MODEL;
@@ -103,6 +104,9 @@ namespace SpoofingDetectionWinformApp.Classes
                     // Split faces
 
                     List<FacePrediction> facePredictions;
+                    //frame = frame.Resize(new OpenCvSharp.Size(300, 300));
+                    float width = frame.Width;
+                    float height = frame.Height;
                     if (predictOne)
                     {
                         var facePrediction = faceDetector.Predict_one(frame);
@@ -120,7 +124,7 @@ namespace SpoofingDetectionWinformApp.Classes
                         __measure.End();
                         nanoseconds = __measure.GetSpentTimeNs();
                         fps = (int)Math.Round(1e+9 / nanoseconds);
-                        MessageBox.Show(string.Format("[INFO] Frame processing time {0} nanoseconds --> fps ~ {1}", nanoseconds, fps));
+                        //MessageBox.Show(string.Format("[INFO] Frame processing time {0} nanoseconds --> fps ~ {1}", nanoseconds, fps));
                     }
                     if (facePredictions.Count > 0)
                     {
@@ -143,13 +147,16 @@ namespace SpoofingDetectionWinformApp.Classes
                         } while (File.Exists(path));
 
                         var facePred = facePredictions[0];
+                        
+                        
                         ImageIO.Save_image(path, facePred.Face);
 
                         //draw the bounding box on the frame
                         var roi = facePred.ROI;
                         string label = facePred.Confidence.ToString("F4");
-                        Cv2.PutText(frame, label, new OpenCvSharp.Point(roi[0], roi[1] - 10), HersheyFonts.HersheySimplex, 0.5 ,new Scalar(255,0,0), 2);
-                        Cv2.Rectangle(frame, new OpenCvSharp.Point(roi[0], roi[1]), new OpenCvSharp.Point(roi[2], roi[3]), new Scalar(255, 0, 0), 2);
+                        
+                        Cv2.PutText(frame, label, new OpenCvSharp.Point(roi[0] * (width / 300), (roi[1] * (height / 300)) - 10), HersheyFonts.HersheySimplex, 0.5 ,new Scalar(255,0,0), 2);
+                        Cv2.Rectangle(frame, new OpenCvSharp.Point(roi[0]*(width/300), roi[1]*(height/300)), new OpenCvSharp.Point(roi[2]*(width/300), roi[3] * (height / 300)), new Scalar(255, 0, 0), 2);
                     }
                     ImageIO.show_image(__WINDOW_CAPTION, frame);
                 }

@@ -112,7 +112,7 @@ namespace SpoofingDetectionWinformApp.Classes
             if (__videoStream != null)
             {
                 MessageBox.Show("[INFO] Stopping video stream ...");
-                __videoStream.Release();
+                
                 __videoStream.Dispose();
                 __videoStream.ThrowIfDisposed();
                 __videoStream = null;
@@ -121,7 +121,7 @@ namespace SpoofingDetectionWinformApp.Classes
             if (__videoWriter != null)
             {
                 MessageBox.Show("[INFO] Stopping video writer ...");
-                __videoWriter.Release();
+                
                 __videoWriter.Dispose();
                 __videoWriter.ThrowIfDisposed(); 
                 __videoWriter = null;
@@ -268,7 +268,7 @@ namespace SpoofingDetectionWinformApp.Classes
         public static void Save_image(string path, Mat image)
         {
             Cv2.ImWrite(path, image);
-            MessageBox.Show("[INFO] Saved image to " + path);
+            //MessageBox.Show("[INFO] Saved image to " + path);
         }
     }
 }

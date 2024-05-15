@@ -15,7 +15,7 @@ namespace SpoofingDetectionWinformApp
 
             
 
-            var image = Cv2.ImRead("D:\\DoAn\\WorkSpace\\face-detection-using-opencvsharp\\Images\\duc.jpg");
+            var image = Cv2.ImRead("C:\\Users\\Duc\\Pictures\\Camera Roll\\1.jpg");
             //Cv2.ImShow("hinh", image);
             //FacePrediction p = new FacePrediction();
             //FaceDetector face_detector = new FaceDetector();
@@ -32,13 +32,28 @@ namespace SpoofingDetectionWinformApp
 
             //Lam viec qua thu muc hinh anh
             //Mat img = new Mat();
-            //Image_io image_Io = new Image_io(srcInput: "D:\\DoAn\\Hinh");
+            //ImageIO image_Io = new ImageIO(srcInput: "D:\\DoAn\\Hinh");
             //img = image_Io.GrabImage();
-            //img = image_Io.GrabImage();
+            ////img = image_Io.GrabImage();
             //Cv2.ImShow("hinh", img);
+            //string outputDir = @"D:\DoAn\OutputDir";
+            //string path;
+            //string fileName = $"{DateTime.Now.Ticks}.png";
+            //MessageBox.Show(fileName);
+            //do
+            //{
+            //    path = Path.Combine(outputDir, fileName);
+
+            //} while (File.Exists(path));
+            //MessageBox.Show(path);
+            //ImageIO.Save_image(path, img);
             //image_Io.SaveFrame(img, "");
             //image_Io.show_image("hinh", img);
 
+         
+
+            //FaceSplitting faceSplitting = new FaceSplitting("D:\\DoAn\\OutputDir");
+            //faceSplitting.Start();
 
 
         }
