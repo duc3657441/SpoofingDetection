@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using OpenCvSharp.Extensions;
+using Microsoft.ML.Data;
 
 namespace SpoofingDetectionWinformApp.Classes
 {
     // Class Image_io,    Grab a video frame from video file or web-cam.    Save a frame to the video file
-
+    
     public class ImageIO
     {
         private VideoCapture? __videoStream;
@@ -20,8 +21,13 @@ namespace SpoofingDetectionWinformApp.Classes
         private List<string>? __imagePathList = new List<string>();
         private OpenCvSharp.Size __resolution = new OpenCvSharp.Size(Config.DEFAULT_RESOLUTION[0], Config.DEFAULT_RESOLUTION[1]);
         private bool __haveNext = false;
-
         private string[] imageExtensions = { "*.jpg", "*.jpeg", "*.png", "*.bmp", "*.gif" };
+        public event Action<string> LogMessageEvent;
+
+        protected virtual void OnLogMessage(string message)
+        {
+            LogMessageEvent?.Invoke(message);
+        }
 
         public ImageIO(string srcInput = null,
                         string videoOutput = null,
@@ -33,13 +39,13 @@ namespace SpoofingDetectionWinformApp.Classes
 
             if (string.IsNullOrEmpty(srcInput))
             {
-                MessageBox.Show("[INFO] Starting video stream from cam 0...");
+                OnLogMessage("[INFO] Starting video stream from cam 0...");
                 __videoStream = new VideoCapture(0);
                 __imagePathIterator = null;
             }
             else if (int.TryParse(srcInput, out _))
             {
-                MessageBox.Show(string.Format("[INFO] Starting video stream from cam {0} ...", srcInput));
+                OnLogMessage(string.Format("[INFO] Starting video stream from cam {0} ...", srcInput));
                 __videoStream = new VideoCapture(int.Parse(srcInput));
                 __imagePathIterator = null;
             }
@@ -251,6 +257,18 @@ namespace SpoofingDetectionWinformApp.Classes
                 Cv2.Resize(image, image, new OpenCvSharp.Size(Config.DEFAULT_RESOLUTION[0], (int)(image.Height * ((double)Config.DEFAULT_RESOLUTION[0] / image.Width)) ));
             }
             Cv2.ImShow(caption, image);
+            
+        }
+
+        public static void Show_Image_Picturebox(Mat image, PictureBox pictureBox ) 
+        {
+            if (Config.DEFAULT_RESOLUTION[0] < image.Width)
+            {
+                Cv2.Resize(image, image, new OpenCvSharp.Size(Config.DEFAULT_RESOLUTION[0], (int)(image.Height * ((double)Config.DEFAULT_RESOLUTION[0] / image.Width))));
+            }
+            
+            Bitmap bitmapImage = image.ToBitmap();
+            pictureBox.Image = bitmapImage;
         }
 
         

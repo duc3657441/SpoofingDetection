@@ -1,6 +1,7 @@
-using OpenCvSharp;
+﻿using OpenCvSharp;
 using SpoofingDetectionWinformApp.Classes;
 using System.IO;
+using Tensorflow.Keras.Engine;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SpoofingDetectionWinformApp
@@ -9,13 +10,12 @@ namespace SpoofingDetectionWinformApp
     {
         VideoCapture _capture = new VideoCapture(0);
         Mat _image = new Mat();
+        private Model _model;
         public Form1()
         {
             InitializeComponent();
 
-            
-
-            var image = Cv2.ImRead("C:\\Users\\Duc\\Pictures\\Camera Roll\\1.jpg");
+            //var image = Cv2.ImRead("C:\\Users\\Duc\\Pictures\\Camera Roll\\1.jpg");
             //Cv2.ImShow("hinh", image);
             //FacePrediction p = new FacePrediction();
             //FaceDetector face_detector = new FaceDetector();
@@ -50,34 +50,55 @@ namespace SpoofingDetectionWinformApp
             //image_Io.SaveFrame(img, "");
             //image_Io.show_image("hinh", img);
 
-         
-
-            //FaceSplitting faceSplitting = new FaceSplitting("D:\\DoAn\\OutputDir");
-            //faceSplitting.Start();
-
-
         }
         Thread Thread;
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
-            //Thread = new Thread(new ThreadStart(CaptureVideo));
-            //Thread.Start();
+
+            Thread = new Thread(new ThreadStart(CaptureVideo));
+            Thread.Start();
         }
 
         public void CaptureVideo()
         {
 
-            ImageIO image_Io = new ImageIO();
-            image_Io.Stream(pictureBox1);
-  
-               
+            //ImageIO image_Io = new ImageIO();
+            //image_Io.Stream(pictureBox1);
+
+            /*// cat hinh anh tu camera
+            FaceSplitting faceSplitting = new FaceSplitting("D:\\DoAn\\OutputDir");
+            faceSplitting.LogMessageEvent += LogMessage;
+            faceSplitting.Start(pictureBox1);
+            */
+            var image = Cv2.ImRead("D:\\TaiLieuCu\\HInh\\Anh.jpg");
+            SpoofingDetector spoofingDetector = new SpoofingDetector("model.zip");
+            spoofingDetector.LogMessageEvent += LogMessage;
+            spoofingDetector.LoadModel();
+            spoofingDetector.Predict(image);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Thread.Abort();
+            Thread.DisableComObjectEagerCleanup();
+            Thread.Interrupt();
+        }
+
+        // Hàm để ghi thông báo vào RichTextBox
+        private void LogMessage(string message)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action<string>(LogMessage), new object[] { message });
+                return;
+            }
+            outputRichTextBox.AppendText(message + Environment.NewLine);
+            outputRichTextBox.ScrollToCaret();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LogMessage("Button clicked!");
         }
     }
 }

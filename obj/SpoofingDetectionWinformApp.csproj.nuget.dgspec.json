@@ -45,6 +45,18 @@
         "net8.0-windows7.0": {
           "targetAlias": "net8.0-windows",
           "dependencies": {
+            "Microsoft.ML": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
+            "Microsoft.ML.ImageAnalytics": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
+            "Microsoft.ML.Vision": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
             "OpenCvSharp4": {
               "target": "Package",
               "version": "[4.9.0.20240103, )"
@@ -56,6 +68,10 @@
             "OpenCvSharp4.runtime.win": {
               "target": "Package",
               "version": "[4.9.0.20240103, )"
+            },
+            "SciSharp.TensorFlow.Redist": {
+              "target": "Package",
+              "version": "[1.15.1, )"
             },
             "System.Memory": {
               "target": "Package",

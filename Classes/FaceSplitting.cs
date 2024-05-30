@@ -23,7 +23,12 @@ namespace SpoofingDetectionWinformApp.Classes
         private float __confidence = Config.DEFAULT_CONFIDENCE;
         private float __skip_frames = 0;
         private Measure? __measure;
+        public event Action<string> LogMessageEvent;
 
+        protected virtual void OnLogMessage(string message)
+        {
+            LogMessageEvent?.Invoke(message);
+        }
         public FaceSplitting(string outputDir, string srcInput = null, OpenCvSharp.Size resolution = default, bool measure = false, float skipFrames = 0)
         {
             __outputDir = outputDir;
@@ -60,9 +65,9 @@ namespace SpoofingDetectionWinformApp.Classes
             return e.Confidence;
         }
 
-        public void Start()
+        public void Start(PictureBox picture)
         {
-            MessageBox.Show("[INFO] Loading OpenCV face caffe net model ...");
+            OnLogMessage("[INFO] Loading OpenCV face caffe net model ...");
             FaceDetector faceDetector = new FaceDetector(caffe_model_path: __caffe_model_path, proto_text_path: __proto_text_path, confidence: __confidence);
             if (faceDetector.load_net_model() == null)
             {
@@ -70,12 +75,12 @@ namespace SpoofingDetectionWinformApp.Classes
                 return;
             }
 
-            MessageBox.Show(string.Format("[INFO] Starting video stream (src={0}) ...", __srcInput));
+            OnLogMessage(string.Format("[INFO] Starting video stream (src={0}) ...", __srcInput));
             ImageIO imageIO = new ImageIO(srcInput: __srcInput, resolution: __resolution);
 
 
             // starting detect face
-            MessageBox.Show("[INFO] Starting face splitter... (press q to exit or esc to toggle predict one/multi)");
+            OnLogMessage("[INFO] Starting face splitter... (press q to exit or esc to toggle predict one/multi)");
             int frameNumber = 0;
             bool predictOne = true;
             bool sortConfidence = true;
@@ -110,12 +115,15 @@ namespace SpoofingDetectionWinformApp.Classes
                     if (predictOne)
                     {
                         var facePrediction = faceDetector.Predict_one(frame);
+                        
                         facePredictions = new List<FacePrediction> {facePrediction};
+                        
                     }
                     else
                     {
                         facePredictions = faceDetector.Predict(frame);
                     }
+                    
 
                     long nanoseconds;
                     int fps;
@@ -128,6 +136,8 @@ namespace SpoofingDetectionWinformApp.Classes
                     }
                     if (facePredictions.Count > 0)
                     {
+
+
                         if (sortConfidence == true)
                         {
                             //sort detected face with max confidence
@@ -145,20 +155,23 @@ namespace SpoofingDetectionWinformApp.Classes
                             path = Path.Combine(__outputDir, $"{DateTime.Now.Ticks}.png");
 
                         } while (File.Exists(path));
+                        
+                      
 
                         var facePred = facePredictions[0];
-                        
-                        
-                        ImageIO.Save_image(path, facePred.Face);
+                        if (facePred.Face != null)
+                        {
+                            ImageIO.Save_image(path, facePred.Face);
+                            //draw the bounding box on the frame
+                            var roi = facePred.ROI;
+                            string label = facePred.Confidence.ToString("F4");
+                            Cv2.PutText(frame, label, new OpenCvSharp.Point(roi[0] * (width / 300), (roi[1] * (height / 300)) - 10), HersheyFonts.HersheySimplex, 0.5, new Scalar(255, 0, 0), 2);
+                            Cv2.Rectangle(frame, new OpenCvSharp.Point(roi[0] * (width / 300), roi[1] * (height / 300)), new OpenCvSharp.Point(roi[2] * (width / 300), roi[3] * (height / 300)), new Scalar(255, 0, 0), 2);
+                        }
 
-                        //draw the bounding box on the frame
-                        var roi = facePred.ROI;
-                        string label = facePred.Confidence.ToString("F4");
-                        
-                        Cv2.PutText(frame, label, new OpenCvSharp.Point(roi[0] * (width / 300), (roi[1] * (height / 300)) - 10), HersheyFonts.HersheySimplex, 0.5 ,new Scalar(255,0,0), 2);
-                        Cv2.Rectangle(frame, new OpenCvSharp.Point(roi[0]*(width/300), roi[1]*(height/300)), new OpenCvSharp.Point(roi[2]*(width/300), roi[3] * (height / 300)), new Scalar(255, 0, 0), 2);
                     }
-                    ImageIO.show_image(__WINDOW_CAPTION, frame);
+                    //ImageIO.show_image(__WINDOW_CAPTION, frame);
+                    ImageIO.Show_Image_Picturebox(frame, picture);
                 }
                 int key = Cv2.WaitKey(1) & 0xFF;
                 if (key == 'q')

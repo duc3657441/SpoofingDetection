@@ -13,6 +13,8 @@
     <SourceRoot Include="C:\Users\Duc\.nuget\packages\" />
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)scisharp.tensorflow.redist\1.15.1\build\netstandard2.0\SciSharp.TensorFlow.Redist.props" Condition="Exists('$(NuGetPackageRoot)scisharp.tensorflow.redist\1.15.1\build\netstandard2.0\SciSharp.TensorFlow.Redist.props')" />
     <Import Project="$(NuGetPackageRoot)opencvsharp4.runtime.win\4.9.0.20240103\build\net5.0\OpenCvSharp4.runtime.win.props" Condition="Exists('$(NuGetPackageRoot)opencvsharp4.runtime.win\4.9.0.20240103\build\net5.0\OpenCvSharp4.runtime.win.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.ml\3.0.1\build\netstandard2.0\Microsoft.ML.props" Condition="Exists('$(NuGetPackageRoot)microsoft.ml\3.0.1\build\netstandard2.0\Microsoft.ML.props')" />
   </ImportGroup>
 </Project>

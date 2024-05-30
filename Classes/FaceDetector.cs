@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using OpenCvSharp;
 using OpenCvSharp.Dnn;
 
-//https://www.youtube.com/watch?v=pRVWdwFy7dM
+
 
 namespace SpoofingDetectionWinformApp.Classes
 {
@@ -52,14 +52,14 @@ namespace SpoofingDetectionWinformApp.Classes
             this.__dnn_net = CvDnn.ReadNetFromCaffe(__proto_text_path, __caffe_model_path);
             return this.__dnn_net;
         }
-
+        
         // Dự đoán 1 list khuôn mặt trong 1 frame
         public List<FacePrediction> Predict(Mat frame)
         {
             List<FacePrediction> facePredictions = new List<FacePrediction>();
             frame = frame.Resize(this.size);
 
-            this.__dnn_net = load_net_model();
+            //this.__dnn_net = load_net_model();
             // get the frame dimensions and convert it to a blob (Lấy kích thước ảnh và chuyển thành blob) 
             var blob = __blob_from_Image(frame);
 
@@ -124,9 +124,10 @@ namespace SpoofingDetectionWinformApp.Classes
                     i = j;
                 }
             }
-
+           
             if (confidence > this.__confidence)
             {
+                
                 int start_x = (int)(detectionmat.At<float>(i, 3) * size.Width);
                 int start_y = (int)(detectionmat.At<float>(i, 4) * size.Height);
                 int end_x = (int)(detectionmat.At<float>(i, 5) * size.Width);
