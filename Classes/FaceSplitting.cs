@@ -94,7 +94,7 @@ namespace SpoofingDetectionWinformApp.Classes
                 if (frame == null)
                 {
                     MessageBox.Show("[ERROR] Can't grab frame!");
-                    continue;
+                    break;
                 }
 
                 frameNumber ++;
@@ -115,7 +115,10 @@ namespace SpoofingDetectionWinformApp.Classes
                     if (predictOne)
                     {
                         var facePrediction = faceDetector.Predict_one(frame);
-                        
+                        if (facePrediction == null)
+                        {
+                            continue;
+                        }
                         facePredictions = new List<FacePrediction> {facePrediction};
                         
                     }
@@ -132,7 +135,7 @@ namespace SpoofingDetectionWinformApp.Classes
                         __measure.End();
                         nanoseconds = __measure.GetSpentTimeNs();
                         fps = (int)Math.Round(1e+9 / nanoseconds);
-                        //MessageBox.Show(string.Format("[INFO] Frame processing time {0} nanoseconds --> fps ~ {1}", nanoseconds, fps));
+                        OnLogMessage(string.Format("[INFO] Frame processing time {0} nanoseconds --> fps ~ {1}", nanoseconds, fps));
                     }
                     if (facePredictions.Count > 0)
                     {

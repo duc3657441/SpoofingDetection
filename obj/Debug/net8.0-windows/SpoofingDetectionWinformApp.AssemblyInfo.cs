@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SpoofingDetectionWinformApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9c85b8e7cd16729766241e17c7c5fbc8e2e5d281")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+08fbe3295d786bd766d662575c14bd017cb37dfb")]
 [assembly: System.Reflection.AssemblyProductAttribute("SpoofingDetectionWinformApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SpoofingDetectionWinformApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

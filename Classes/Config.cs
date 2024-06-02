@@ -35,8 +35,8 @@ namespace SpoofingDetectionWinformApp.Classes
         public static int DEFAULT_BATCH_SIZE = 8;
         public static int DEFAULT_EPOCHS = 50;
         public const double INIT_LR = 1e-4;
-        public static int FACE_HEIGHT = 56;
-        public static int FACE_WIDTH = 56;
+        //public static int FACE_HEIGHT = 56;
+        //public static int FACE_WIDTH = 56;
         public static int FACE_DEPTH = 3;
     }
 }

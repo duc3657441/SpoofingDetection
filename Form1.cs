@@ -11,6 +11,7 @@ namespace SpoofingDetectionWinformApp
         VideoCapture _capture = new VideoCapture(0);
         Mat _image = new Mat();
         private Model _model;
+        private bool flag = true;
         public Form1()
         {
             InitializeComponent();
@@ -50,6 +51,7 @@ namespace SpoofingDetectionWinformApp
             //image_Io.SaveFrame(img, "");
             //image_Io.show_image("hinh", img);
 
+
         }
         Thread Thread;
 
@@ -71,11 +73,25 @@ namespace SpoofingDetectionWinformApp
             faceSplitting.LogMessageEvent += LogMessage;
             faceSplitting.Start(pictureBox1);
             */
+
+            /*
             var image = Cv2.ImRead("D:\\TaiLieuCu\\HInh\\Anh.jpg");
             SpoofingDetector spoofingDetector = new SpoofingDetector("model.zip");
             spoofingDetector.LogMessageEvent += LogMessage;
             spoofingDetector.LoadModel();
             spoofingDetector.Predict(image);
+            */
+
+            // su dung camera check hinh anh live/spoof
+            SpoofingDetecting spoofingDetecting = new SpoofingDetecting("0", "D:\\DoAn\\OutputDir\\dirName", "model.zip");
+            spoofingDetecting.LogMessageEvent += LogMessage;
+            spoofingDetecting.Start(pictureBox1, flag);
+
+            //ImageIO imageIO = new ImageIO();
+            //imageIO.ShowVideo();
+            //FaceSplitting faceSplitting = new FaceSplitting("D:\\DoAn\\OutputDir", "D:\\TaiLieuCu\\SpoofingDetection\\DataSet\\Test\\NUAA\\ImposterRaw\\00");
+            //faceSplitting.LogMessageEvent += LogMessage;
+            //faceSplitting.Start(pictureBox1);
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -98,7 +114,14 @@ namespace SpoofingDetectionWinformApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            LogMessage("Button clicked!");
+            Application.Exit();
+            Thread.DisableComObjectEagerCleanup();
+            Thread.Interrupt();
+        }
+
+        private void btnCloseCamera_Click(object sender, EventArgs e)
+        {
+            flag = false;
         }
     }
 }

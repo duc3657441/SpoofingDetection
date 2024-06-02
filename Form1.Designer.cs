@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             pictureBox1 = new PictureBox();
-            button1 = new Button();
+            btnExit = new Button();
             outputRichTextBox = new RichTextBox();
+            btnCloseCamera = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -43,31 +44,42 @@
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
-            // button1
+            // btnExit
             // 
-            button1.Location = new Point(833, 29);
-            button1.Name = "button1";
-            button1.Size = new Size(198, 29);
-            button1.TabIndex = 1;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnExit.Location = new Point(806, 477);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(215, 52);
+            btnExit.TabIndex = 1;
+            btnExit.Text = "Exit";
+            btnExit.UseVisualStyleBackColor = true;
+            btnExit.Click += button1_Click;
             // 
             // outputRichTextBox
             // 
-            outputRichTextBox.Location = new Point(823, 98);
+            outputRichTextBox.Location = new Point(806, 12);
             outputRichTextBox.Name = "outputRichTextBox";
-            outputRichTextBox.Size = new Size(235, 338);
+            outputRichTextBox.Size = new Size(374, 459);
             outputRichTextBox.TabIndex = 2;
             outputRichTextBox.Text = "";
+            // 
+            // btnCloseCamera
+            // 
+            btnCloseCamera.Location = new Point(1027, 477);
+            btnCloseCamera.Name = "btnCloseCamera";
+            btnCloseCamera.Size = new Size(149, 46);
+            btnCloseCamera.TabIndex = 3;
+            btnCloseCamera.Text = "Close Camera";
+            btnCloseCamera.UseVisualStyleBackColor = true;
+            btnCloseCamera.Click += btnCloseCamera_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1070, 553);
+            ClientSize = new Size(1188, 953);
+            Controls.Add(btnCloseCamera);
             Controls.Add(outputRichTextBox);
-            Controls.Add(button1);
+            Controls.Add(btnExit);
             Controls.Add(pictureBox1);
             Name = "Form1";
             Text = "Form1";
@@ -80,7 +92,8 @@
         #endregion
 
         private PictureBox pictureBox1;
-        private Button button1;
+        private Button btnExit;
         private RichTextBox outputRichTextBox;
+        private Button btnCloseCamera;
     }
 }

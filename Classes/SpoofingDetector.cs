@@ -79,7 +79,7 @@ namespace SpoofingDetectionWinformApp.Classes
             return model;
         }
 
-        public List<SpoofingPredictions> Predict (Mat frame)
+        public List<SpoofingPredictions> Predict (Mat frame, bool predictOne = true)
         {
             List<SpoofingPredictions> spoofingPredictions = new List<SpoofingPredictions>();
             
@@ -88,20 +88,29 @@ namespace SpoofingDetectionWinformApp.Classes
                 throw new Exception("[ERROR] Can't load model");
             }
             List<FacePrediction> facePredictions;
-            if (__predictOne)
+            if (predictOne)
             {
                 var facePrediction = __faceDetector.Predict_one(frame);
+               
                 facePredictions = new List<FacePrediction> { facePrediction };
             }
             else
             {
                 facePredictions = __faceDetector.Predict(frame);
             }
+            
+
             foreach (var facePred in facePredictions)
             {
                 Mat face = new Mat();
 
-                Cv2.Resize(facePred.Face, face, new OpenCvSharp.Size(Config.FACE_WIDTH, Config.FACE_HEIGHT), interpolation: InterpolationFlags.Linear);
+                //Cv2.Resize(facePred.Face, face, new OpenCvSharp.Size(Config.FACE_WIDTH, Config.FACE_HEIGHT), interpolation: InterpolationFlags.Linear);
+                if (facePred.Face == null || facePred == null)
+                {
+                    return null;
+                }
+                face = facePred.Face;
+                
                 byte[] byteArray = face.ToBytes();
                 var imageDataList = new List<ImageModelInput>
                                     {

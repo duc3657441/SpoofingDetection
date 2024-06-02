@@ -51,13 +51,13 @@ namespace SpoofingDetectionWinformApp.Classes
             }
             else if (File.Exists(srcInput))
             {
-                MessageBox.Show(string.Format("[INFO] Starting video stream from file {0}...", srcInput));
+                OnLogMessage(string.Format("[INFO] Starting video stream from file {0}...", srcInput));
                 __videoStream = new VideoCapture(srcInput);
                 __imagePathIterator = null;
             }
             else if (Directory.Exists(srcInput))
             {
-                MessageBox.Show(string.Format("[INFO] Starting image from folder {0}...", srcInput));
+                OnLogMessage(string.Format("[INFO] Starting image from folder {0}...", srcInput));
                 __videoStream = null;
                 //this.__imagePathList = Directory.GetFiles(srcInput, "*.jpg");
 
@@ -117,7 +117,7 @@ namespace SpoofingDetectionWinformApp.Classes
         {
             if (__videoStream != null)
             {
-                MessageBox.Show("[INFO] Stopping video stream ...");
+                OnLogMessage("[INFO] Stopping video stream ...");
                 
                 __videoStream.Dispose();
                 __videoStream.ThrowIfDisposed();
@@ -126,7 +126,7 @@ namespace SpoofingDetectionWinformApp.Classes
 
             if (__videoWriter != null)
             {
-                MessageBox.Show("[INFO] Stopping video writer ...");
+                OnLogMessage("[INFO] Stopping video writer ...");
                 
                 __videoWriter.Dispose();
                 __videoWriter.ThrowIfDisposed(); 
@@ -218,7 +218,7 @@ namespace SpoofingDetectionWinformApp.Classes
 
                         if (frame.Empty())
                         {
-                            MessageBox.Show("The video has been read");
+                            OnLogMessage("The video has been read");
                         }
 
                         Cv2.ImShow("Video", frame);
